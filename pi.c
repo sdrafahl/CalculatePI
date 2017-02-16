@@ -5,22 +5,23 @@
  typedef struct {
     /*Number of iterations that will process through infinite series*/
     int iterations;
-    float added;
-    float substracted;
+     double added;
+     double substracted;
 }DataShared;
 
 int DataSharedConst(DataShared* d){
-    d->iterations=10000;
+    d->iterations=400000000;
     d->added=0.0;
     d->substracted=0.0;
     return 0;
 }
+
 void *calc_add(void *arg){
     printf("addition thread \n");
     DataShared *data = arg;
     int itr = data->iterations;
     int x;
-    float total = 0.0;
+    double total = 0.0;
     int denom=1;
     for(x=0;x<itr;x++){
         total+=1.0/denom;
@@ -34,10 +35,10 @@ void *calc_add(void *arg){
 void *calc_sub(void *arg){
     printf("substraction thread \n");
     DataShared *data = arg;
-    DataSharedConst(data);
+    
     int itr = data->iterations;
     int x;
-    float total = 0.0;
+    double total = 0.0;
     int denom = 3;
     for(x=0;x<itr;x++){
         total+=1.0/denom;
@@ -56,6 +57,7 @@ int main()
     pthread_t tid1;
     DataShared *cache;
     cache = malloc(sizeof(DataShared));
+    DataSharedConst(cache);
     /*Processing*/
     if(pthread_create(&tid, NULL, calc_add, cache)){
         return 1;
