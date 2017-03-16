@@ -59,8 +59,11 @@ void *calc_sub(void *arg){
   
 int main(int argc, char *argv[])
 {
+    if(!argc){
+        printf("Please Read README.MD, requires command line arguments");
+        return 1;
+    }
     /*Initial Setup*/
-    
     pthread_t tid;
     pthread_t tid1;
     DataShared *cache;
