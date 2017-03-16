@@ -59,8 +59,8 @@ void *calc_sub(void *arg){
   
 int main(int argc, char *argv[])
 {
-    if(!argc){
-        printf("Please Read README.MD, requires command line arguments");
+    if(argc==1){
+        printf("Please Read README.MD, requires command line arguments \n");
         return 1;
     }
     /*Initial Setup*/
